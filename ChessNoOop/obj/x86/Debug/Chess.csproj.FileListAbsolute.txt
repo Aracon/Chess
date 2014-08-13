@@ -1,0 +1,4 @@
+c:\Курс программирование\Космический старт\Projectiere\Шахматы\ChessOop\ChessNoOop\bin\Debug\Chess.exe
+c:\Курс программирование\Космический старт\Projectiere\Шахматы\ChessOop\ChessNoOop\bin\Debug\Chess.pdb
+c:\Курс программирование\Космический старт\Projectiere\Шахматы\ChessOop\ChessNoOop\obj\x86\Debug\Chess.exe
+c:\Курс программирование\Космический старт\Projectiere\Шахматы\ChessOop\ChessNoOop\obj\x86\Debug\Chess.pdb
