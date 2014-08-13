@@ -8,6 +8,7 @@ namespace Chess
     class Program
     {
         static int[,] board;
+        static Board brd;
 
         static void ReadMove(out int iFrom, out int jFrom, out int iTo, out int jTo)
         {
@@ -48,10 +49,47 @@ namespace Chess
             } while (reading);
         }
 
+        static void PlaceFigures(Board board)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Pawn p = new Pawn(FigureColor.White);
+                board.AddFigure(p, i, 1);
 
+                p = new Pawn(FigureColor.Black);
+                board.AddFigure(p, i, 6);
+            }
+            //board[0, 0] = board[0, 7] = 2; // Ладья
+            //board[7, 0] = board[7, 7] = -2;
+        }
+
+        static bool CheckMove(int i1, int j1, int i2, int j2)
+        {
+            if (brd[i1, j1] != null)
+            {
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         static void Main(string[] args)
         {
+            brd = new Board(8, 8);
+            PlaceFigures(brd);
+
+            int i1, j1, i2, j2;
+            ReadMove(out i1, out j1, out i2, out j2);
+
+            if (CheckMove(i1, j1, i2, j2))
+            {
+
+            }
+
+
+
+
             board = new int[8, 8];
 
             for (int i = 0; i < 8; i++)
@@ -77,7 +115,7 @@ namespace Chess
                 }
 
 
-                int i1, j1, i2, j2;
+               
 
                 bool reading = true;
                

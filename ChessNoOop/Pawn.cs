@@ -7,6 +7,11 @@ namespace Chess
 {
     class Pawn
     {
+        public Pawn(FigureColor color)
+        {
+            this.color = color;
+        }
+
         FigureColor color;
         public FigureColor Color
         {

@@ -7,6 +7,11 @@ namespace Chess
 {
     class Rook
     {
+        public Rook(FigureColor color)
+        {
+            this.color = color;
+        }
+
         FigureColor color;
         public FigureColor Color
         {
