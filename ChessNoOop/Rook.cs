@@ -12,6 +12,8 @@ namespace Chess
             this.color = color;
         }
 
+       
+
         FigureColor color;
         public FigureColor Color
         {

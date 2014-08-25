@@ -10,8 +10,9 @@ namespace Chess
         static int[,] board;
         static Board brd;
 
-        static void ReadMove(out int iFrom, out int jFrom, out int iTo, out int jTo)
+        static Move ReadMove()
         {
+            int iFrom, jFrom, iTo, jTo;
             iFrom = 0;
             jFrom = 0;
             iTo = 0;
@@ -47,6 +48,7 @@ namespace Chess
                 }
 
             } while (reading);
+            return new Move(iFrom, jFrom, iTo, jTo);
         }
 
         static void PlaceFigures(Board board)
@@ -63,29 +65,112 @@ namespace Chess
             //board[7, 0] = board[7, 7] = -2;
         }
 
-        static bool CheckMove(int i1, int j1, int i2, int j2)
+        static bool CheckMove(Move move, FigureColor currentPlayerColor)
         {
-            if (brd[i1, j1] != null)
-            {
-            }
-            else
+            if (brd[move.ColFrom, move.RowFrom] == null)
             {
                 return false;
             }
+            FigureColor colorFrom;
+
+            // Проверяем, принадлежит ли фигура текущему игроку
+            object figure = brd[move.ColFrom, move.RowFrom];
+            if (figure is Rook)
+            {
+                colorFrom = (figure as Rook).Color;
+            }
+            else if (figure is Pawn)
+            {
+                colorFrom = (figure as Pawn).Color;
+            }
+            else
+            {
+                throw new ApplicationException("Unknown figure type");
+            }
+
+            if (colorFrom != currentPlayerColor)
+            {
+                return false;
+            }
+
+
+
+            // Проверка, ходит ли фигура таким образом
+            if (figure is Rook)
+            {
+                if ((figure as Rook).CheckMove(move) == false)
+                    return false;
+            }
+            else if (figure is Pawn)
+            {
+                if ((figure as Pawn).CheckMove(move, brd) == false)
+                    return false;
+            }
+            else
+            {
+                throw new ApplicationException("Unknown figure type");
+            }
+            // Конец проверки, ходит ли фигура таким образом
+
+            object fig2 = brd[move.ColTo, move.RowTo];
+            if (fig2 != null)
+            {
+                FigureColor colorTo;
+                if (fig2 is Rook)
+                {
+                    colorTo = (fig2 as Rook).Color;
+                }
+                else if (fig2 is Pawn)
+                {
+                    colorTo = (fig2 as Pawn).Color;
+                }
+                else
+                {
+                    throw new ApplicationException("Unknown figure type");
+                }
+                
+                if (colorFrom == colorTo)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         static void Main(string[] args)
         {
             brd = new Board(8, 8);
             PlaceFigures(brd);
+            FigureColor currentPlayerColor = FigureColor.White;
 
             int i1, j1, i2, j2;
-            ReadMove(out i1, out j1, out i2, out j2);
 
-            if (CheckMove(i1, j1, i2, j2))
+
+
+            Move move;
+
+            while (true)
             {
+                brd.PrintBoard();
 
+                move = ReadMove();
+
+                if (CheckMove(move, currentPlayerColor))
+                {
+                    brd.ApplyMove(move);
+                }
+
+                if (currentPlayerColor == FigureColor.White)
+                    currentPlayerColor = FigureColor.Black;
+                else
+                    currentPlayerColor = FigureColor.White;
             }
+
+            i1 = move.ColFrom;
+            j1 = move.RowFrom;
+            i2 = move.ColTo;
+            j2 = move.RowTo;
 
 
 
@@ -121,7 +206,12 @@ namespace Chess
                
                 do
                 {
-                    ReadMove(out i1, out j1, out i2, out j2);
+                    move = ReadMove();
+
+                    i1 = move.ColFrom;
+                    j1 = move.RowFrom;
+                    i2 = move.ColTo;
+                    j2 = move.RowTo;
 
                     if (board[j1, i1] == 0)
                     {
