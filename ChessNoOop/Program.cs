@@ -98,7 +98,7 @@ namespace Chess
             // Проверка, ходит ли фигура таким образом
             if (figure is Rook)
             {
-                if ((figure as Rook).CheckMove(move) == false)
+                if ((figure as Rook).CheckMove(move, brd) == false)
                     return false;
             }
             else if (figure is Pawn)
@@ -159,12 +159,17 @@ namespace Chess
                 if (CheckMove(move, currentPlayerColor))
                 {
                     brd.ApplyMove(move);
+
+                    if (currentPlayerColor == FigureColor.White)
+                        currentPlayerColor = FigureColor.Black;
+                    else
+                        currentPlayerColor = FigureColor.White;
+                }
+                else
+                {
+                    Console.WriteLine("wrong move");
                 }
 
-                if (currentPlayerColor == FigureColor.White)
-                    currentPlayerColor = FigureColor.Black;
-                else
-                    currentPlayerColor = FigureColor.White;
             }
 
             i1 = move.ColFrom;

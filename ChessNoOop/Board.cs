@@ -81,27 +81,34 @@ namespace Chess
                     string sym = "";
 
                     object figure = board[i, j];
-                    if (figure is Rook)
+                    if (figure == null)
                     {
-                        sym = "R";
-                        FigureColor color = (figure as Rook).Color;
-                        if (color == FigureColor.Black)
-                            sym = sym + "b";
-                        else
-                            sym = sym + "w";
-                    }
-                    else if (figure is Pawn)
-                    {
-                        sym = "P";
-                        FigureColor color = (figure as Pawn).Color;
-                        if (color == FigureColor.Black)
-                            sym = sym + "b";
-                        else
-                            sym = sym + "w";
+                        sym = "__";
                     }
                     else
                     {
-                        throw new ApplicationException("Unknown figure type");
+                        if (figure is Rook)
+                        {
+                            sym = "R";
+                            FigureColor color = (figure as Rook).Color;
+                            if (color == FigureColor.Black)
+                                sym = sym + "b";
+                            else
+                                sym = sym + "w";
+                        }
+                        else if (figure is Pawn)
+                        {
+                            sym = "P";
+                            FigureColor color = (figure as Pawn).Color;
+                            if (color == FigureColor.Black)
+                                sym = sym + "b";
+                            else
+                                sym = sym + "w";
+                        }
+                        else
+                        {
+                            throw new ApplicationException("Unknown figure type");
+                        }
                     }
 
                     Console.Write(sym+" ");
