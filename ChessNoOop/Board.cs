@@ -45,6 +45,11 @@ namespace Chess
                 (figure as Pawn).Row = move.RowTo;
                 (figure as Pawn).Column = move.ColTo;
             }
+            else if (figure is Bishop)
+            {
+                (figure as Bishop).Row = move.RowTo;
+                (figure as Bishop).Column = move.ColTo;
+            }
             else
             {
                 throw new ApplicationException("Unknown figure type");
@@ -64,6 +69,11 @@ namespace Chess
             {
                 (figure as Pawn).Row = row;
                 (figure as Pawn).Column = col;
+            }
+            else if (figure is Bishop)
+            {
+                (figure as Bishop).Row = row;
+                (figure as Bishop).Column = col;
             }
             else
             {
@@ -100,6 +110,15 @@ namespace Chess
                         {
                             sym = "P";
                             FigureColor color = (figure as Pawn).Color;
+                            if (color == FigureColor.Black)
+                                sym = sym + "b";
+                            else
+                                sym = sym + "w";
+                        }
+                        else if (figure is Bishop)
+                        {
+                            sym = "B";
+                            FigureColor color = (figure as Bishop).Color;
                             if (color == FigureColor.Black)
                                 sym = sym + "b";
                             else
