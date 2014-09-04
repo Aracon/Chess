@@ -5,38 +5,20 @@ using System.Text;
 
 namespace Chess
 {
-    class Bishop
+    class Bishop : Figure
     {
-        public Bishop(FigureColor color)
+        public Bishop(FigureColor color) : base(color)
         {
-            this.color = color;
         }
 
 
 
-        FigureColor color;
-        public FigureColor Color
+        public override bool CheckMove(Move m, Board board)
         {
-            get { return color; }
+            // TODO: Write move check
+            return true;
         }
-
-        int col;
-        public int Column
-        {
-            get { return col; }
-            set { col = value; }
-        }
-        int row;
-        public int Row
-        {
-            get { return row; }
-            set { row = value; }
-        }
-
-        public bool CheckMove(Move m, Board board)
-        {
-           // TODO: Write move check
-           return true;
-        }
+        
+       
     }
 }

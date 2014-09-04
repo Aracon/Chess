@@ -100,73 +100,23 @@ namespace Chess
             FigureColor colorFrom;
 
             // Проверяем, принадлежит ли фигура текущему игроку
-            object figure = brd[move.ColFrom, move.RowFrom];
-            if (figure is Rook)
-            {
-                colorFrom = (figure as Rook).Color;
-            }
-            else if (figure is Pawn)
-            {
-                colorFrom = (figure as Pawn).Color;
-            }
-            else if (figure is Bishop)
-            {
-                colorFrom = (figure as Bishop).Color;
-            }
-            else
-            {
-                throw new ApplicationException("Unknown figure type");
-            }
+            Figure figure = brd[move.ColFrom, move.RowFrom];
+            colorFrom = figure.Color;
+
 
             if (colorFrom != currentPlayerColor)
             {
                 return false;
             }
 
-
-
             // Проверка, ходит ли фигура таким образом
-            if (figure is Rook)
-            {
-                if ((figure as Rook).CheckMove(move, brd) == false)
-                    return false;
-            }
-            else if (figure is Pawn)
-            {
-                if ((figure as Pawn).CheckMove(move, brd) == false)
-                    return false;
-            }
-            else if (figure is Bishop)
-            {
-                if ((figure as Bishop).CheckMove(move, brd) == false)
-                    return false;
-            }
-            else
-            {
-                throw new ApplicationException("Unknown figure type");
-            }
-            // Конец проверки, ходит ли фигура таким образом
+            if (figure.CheckMove(move, brd) == false)
+                return false;
 
-            object fig2 = brd[move.ColTo, move.RowTo];
+            Figure fig2 = brd[move.ColTo, move.RowTo];
             if (fig2 != null)
             {
-                FigureColor colorTo;
-                if (fig2 is Rook)
-                {
-                    colorTo = (fig2 as Rook).Color;
-                }
-                else if (fig2 is Pawn)
-                {
-                    colorTo = (fig2 as Pawn).Color;
-                }
-                else if (fig2 is Bishop)
-                {
-                    colorTo = (fig2 as Bishop).Color;
-                }
-                else
-                {
-                    throw new ApplicationException("Unknown figure type");
-                }
+                FigureColor colorTo = fig2.Color;
                 
                 if (colorFrom == colorTo)
                 {
