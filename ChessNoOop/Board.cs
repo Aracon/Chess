@@ -57,44 +57,18 @@ namespace Chess
 
                     string sym = "";
 
-                    object figure = board[i, j];
+                    Figure figure = board[i, j];
                     if (figure == null)
                     {
                         sym = "__";
                     }
                     else
                     {
-                        if (figure is Rook)
-                        {
-                            sym = "R";
-                            FigureColor color = (figure as Rook).Color;
-                            if (color == FigureColor.Black)
-                                sym = sym + "b";
-                            else
-                                sym = sym + "w";
-                        }
-                        else if (figure is Pawn)
-                        {
-                            sym = "P";
-                            FigureColor color = (figure as Pawn).Color;
-                            if (color == FigureColor.Black)
-                                sym = sym + "b";
-                            else
-                                sym = sym + "w";
-                        }
-                        else if (figure is Bishop)
-                        {
-                            sym = "B";
-                            FigureColor color = (figure as Bishop).Color;
-                            if (color == FigureColor.Black)
-                                sym = sym + "b";
-                            else
-                                sym = sym + "w";
-                        }
+                        sym = figure.Symbol;
+                        if (figure.Color == FigureColor.Black)
+                            sym = sym + "b";
                         else
-                        {
-                            throw new ApplicationException("Unknown figure type");
-                        }
+                            sym = sym + "w";
                     }
 
                     Console.Write(sym+" ");

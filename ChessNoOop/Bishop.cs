@@ -11,6 +11,10 @@ namespace Chess
         {
         }
 
+        public override string Symbol
+        {
+            get { return "B"; }
+        }
 
 
         public override bool CheckMove(Move m, Board board)

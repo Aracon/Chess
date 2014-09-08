@@ -18,6 +18,11 @@ namespace Chess
             get { return color; }
         }
 
+        abstract public string Symbol
+        {
+            get;
+        }
+
         int col;
         public int Column
         {
