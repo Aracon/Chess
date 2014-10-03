@@ -24,9 +24,11 @@ namespace Chess
             get { return board[col, row]; }
         }
 
-        public void MoveFigure(Figure figure, int col, int row)
+        public bool IsCellOnBoard(int col, int row)
         {
-            throw new NotImplementedException();
+            if (col < 0 || col >= Columns) return false;
+            if (row < 0 || row >= Rows) return false;
+            return true;
         }
 
         public void ApplyMove(Move move)
